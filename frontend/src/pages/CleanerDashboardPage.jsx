@@ -45,7 +45,7 @@ const CleanerDashboardPage = () => {
 
   const fetchReports = async (token) => {
     try {
-      const response = await axios.get('http://localhost:5001/api/reports', {
+      const response = await axios.get('https://sweeply-garbage-reporting-system.onrender.com', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setReports(response.data);
@@ -84,7 +84,7 @@ const CleanerDashboardPage = () => {
       }
 
       const token = localStorage.getItem('token');
-      const res = await axios.put('http://localhost:5001/api/users/profile', {
+      const res = await axios.put('https://sweeply-garbage-reporting-system.onrender.com', {
         fullName: editName,
         profileImage: imageUrl
       }, {
@@ -116,7 +116,7 @@ const CleanerDashboardPage = () => {
       const token = localStorage.getItem('token');
       
       await axios.put(
-        `http://localhost:5001/api/reports/${selectedReport._id}`,
+        `https://sweeply-garbage-reporting-system.onrender.com}`,
         { 
           status: 'Cleaned',
           cleanedImageUrl: imageUrl // Send proof to backend

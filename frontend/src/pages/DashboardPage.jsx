@@ -41,7 +41,7 @@ const DashboardPage = () => {
   const fetchMyReports = async (token) => {
     try {
       // Notice we use /myreports here to only get this citizen's reports
-      const response = await axios.get('http://localhost:5001/api/reports/myreports', {
+      const response = await axios.get('https://sweeply-garbage-reporting-system.onrender.com', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setReports(response.data);
@@ -80,7 +80,7 @@ const DashboardPage = () => {
       }
 
       const token = localStorage.getItem('token');
-      const res = await axios.put('http://localhost:5001/api/users/profile', {
+      const res = await axios.put('https://sweeply-garbage-reporting-system.onrender.com', {
         fullName: editName,
         profileImage: imageUrl
       }, {
