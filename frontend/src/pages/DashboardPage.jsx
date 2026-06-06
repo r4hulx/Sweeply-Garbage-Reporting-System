@@ -41,9 +41,10 @@ const DashboardPage = () => {
   const fetchMyReports = async (token) => {
     try {
       // Notice we use /myreports here to only get this citizen's reports
-      const response = await axios.get('https://sweeply-garbage-reporting-system.onrender.com', {
+      const response = await axios.get('https://sweeply-garbage-reporting-system.onrender.com/api/reports/myreports', {
         headers: { Authorization: `Bearer ${token}` },
       });
+      console.log("REPORT RESPONSE:", response.data);
       setReports(response.data);
       setLoading(false);
     } catch (error) {
