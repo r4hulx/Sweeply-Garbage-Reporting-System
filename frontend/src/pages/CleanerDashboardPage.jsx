@@ -45,11 +45,15 @@ const CleanerDashboardPage = () => {
 
   const fetchReports = async (token) => {
     try {
-      const response = await axios.get('https://sweeply-garbage-reporting-system.onrender.com', {
+      const response = await axios.get('https://sweeply-garbage-reporting-system.onrender.com/api/reports', {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setReports(response.data);
-      setLoading(false);
+      console.log("REPORT DATA:", response.data);
+    console.log("IS ARRAY:", Array.isArray(response.data));
+
+    setReports(Array.isArray(response.data) ? response.data : []);
+
+    setLoading(false);
     } catch (error) {
       console.log("CLEANER RESPONSE:", response.data);
       console.error('Error fetching reports:', error);
@@ -85,7 +89,7 @@ const CleanerDashboardPage = () => {
       }
 
       const token = localStorage.getItem('token');
-      const res = await axios.put('https://sweeply-garbage-reporting-system.onrender.com', {
+      const res = await axios.put('https://sweeply-garbage-reporting-system.onrender.com/api/users/profile', {
         fullName: editName,
         profileImage: imageUrl
       }, {
@@ -117,7 +121,7 @@ const CleanerDashboardPage = () => {
       const token = localStorage.getItem('token');
       
       await axios.put(
-        `https://sweeply-garbage-reporting-system.onrender.com}`,
+        `https://sweeply-garbage-reporting-system.onrender.com/api/reports/:${selectedReport._id}/clean`,
         { 
           status: 'Cleaned',
           cleanedImageUrl: imageUrl // Send proof to backend
