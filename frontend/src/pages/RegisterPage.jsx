@@ -69,7 +69,10 @@ const RegisterPage = () => {
         registrationData.employeeId = formData.employeeId;
       }
 
-      await axios.post('https://sweeply-garbage-reporting-system.onrender.com', registrationData);
+await axios.post(
+  'https://sweeply-garbage-reporting-system.onrender.com/api/users/register',
+  registrationData
+);
       
       setLoading(false);
       alert('Registration successful! Please log in.');

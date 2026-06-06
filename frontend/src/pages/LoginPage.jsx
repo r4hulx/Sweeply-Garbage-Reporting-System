@@ -18,10 +18,12 @@ const LoginPage = () => {
 
     try {
       // Make sure this port matches your backend (5001)
-      const res = await axios.post('https://sweeply-garbage-reporting-system.onrender.com', {
-        email,
-        password,
-      });
+      const res = await axios.post('https://sweeply-garbage-reporting-system.onrender.com/api/users/login',
+  {
+    email,
+    password,
+  }
+      );
 
       console.log("FULL SERVER RESPONSE:", res.data); // 🔍 Debug log to see structure
 
