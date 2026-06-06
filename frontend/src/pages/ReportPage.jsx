@@ -98,7 +98,7 @@ const ReportPage = () => {
       };
 
       await axios.post(
-        'https://sweeply-garbage-reporting-system.onrender.com', 
+        'https://sweeply-garbage-reporting-system.onrender.com/api/reports', 
         reportData,
         config
       );
