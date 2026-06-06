@@ -51,6 +51,7 @@ const CleanerDashboardPage = () => {
       setReports(response.data);
       setLoading(false);
     } catch (error) {
+      console.log("CLEANER RESPONSE:", response.data);
       console.error('Error fetching reports:', error);
       setLoading(false);
     }
