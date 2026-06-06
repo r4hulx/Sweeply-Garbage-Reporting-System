@@ -121,7 +121,7 @@ const CleanerDashboardPage = () => {
       const token = localStorage.getItem('token');
       
       await axios.put(
-        `https://sweeply-garbage-reporting-system.onrender.com/api/reports/:${selectedReport._id}/clean`,
+        `https://sweeply-garbage-reporting-system.onrender.com/api/reports/${selectedReport._id}`,
         { 
           status: 'Cleaned',
           cleanedImageUrl: imageUrl // Send proof to backend
