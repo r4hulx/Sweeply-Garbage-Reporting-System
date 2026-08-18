@@ -40,7 +40,7 @@ const LoginPage = () => {
   }
       );
 
-      console.log("FULL SERVER RESPONSE:", res.data); // 🔍 Debug log to see structure
+      console.log("Login response received, keys:", Object.keys(res.data));
 
       // 1. Get the Token
       const token = res.data.token;

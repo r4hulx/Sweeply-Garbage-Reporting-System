@@ -3,7 +3,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { API_URL } from '../config/api';
 import Navbar from "../components/Navbar";
-import ProfileModal from "../components/ProfileModal";
 
 const DashboardPage = () => {
   const [reports, setReports] = useState([]);
@@ -155,7 +154,7 @@ const DashboardPage = () => {
         {/* --- Hero Section & Action Button --- */}
         <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col md:flex-row items-center justify-between mb-8 gap-6">
            <div>
-              <h1 className="text-3xl font-bold text-gray-800 mb-2">Welcome back, {currentUser?.fullName.split(' ')[0]}! 👋</h1>
+              <h1 className="text-3xl font-bold text-gray-800 mb-2">Welcome back, {currentUser?.fullName?.split(' ')[0] || 'Citizen'}! 👋</h1>
               <p className="text-gray-500">Thank you for helping keep our community clean. Your reports make a real difference.</p>
            </div>
            <button 
