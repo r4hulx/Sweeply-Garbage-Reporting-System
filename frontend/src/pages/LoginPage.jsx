@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import api from '../api/axiosInstance';
 import { useNavigate, Link } from 'react-router-dom';
 
 const LoginPage = () => {
@@ -17,13 +17,10 @@ const LoginPage = () => {
     console.log("Attempting to login with:", email); 
 
     try {
-      // Make sure this port matches your backend (5001)
-      const res = await axios.post('https://sweeply-garbage-reporting-system.onrender.com/api/users/login',
-  {
-    email,
-    password,
-  }
-      );
+      const res = await api.post('/api/users/login', {
+        email,
+        password,
+      });
 
       console.log("FULL SERVER RESPONSE:", res.data); // 🔍 Debug log to see structure
 

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import api from '../api/axiosInstance';
 import { useNavigate } from 'react-router-dom';
 
 // --- IMPORTANT: CLOUDINARY DETAILS ---
@@ -97,11 +98,7 @@ const ReportPage = () => {
         location,
       };
 
-      await axios.post(
-        'https://sweeply-garbage-reporting-system.onrender.com/api/reports', 
-        reportData,
-        config
-      );
+      await api.post('/api/reports', reportData, config);
 
       setIsUploading(false);
       alert('Report Submitted Successfully!');
