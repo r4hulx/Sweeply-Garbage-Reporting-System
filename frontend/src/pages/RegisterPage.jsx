@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import api from '../api/axiosInstance';
 import { useNavigate, Link } from 'react-router-dom';
 
 // 1. We've moved the form component OUTSIDE.
@@ -69,10 +69,7 @@ const RegisterPage = () => {
         registrationData.employeeId = formData.employeeId;
       }
 
-await axios.post(
-  'https://sweeply-garbage-reporting-system.onrender.com/api/users/register',
-  registrationData
-);
+await api.post('/api/users/register', registrationData);
       
       setLoading(false);
       alert('Registration successful! Please log in.');

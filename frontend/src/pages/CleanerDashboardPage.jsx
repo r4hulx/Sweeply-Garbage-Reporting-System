@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import api from '../api/axiosInstance';
 import { useNavigate } from 'react-router-dom';
 
 const CleanerDashboardPage = () => {
@@ -45,17 +46,16 @@ const CleanerDashboardPage = () => {
 
   const fetchReports = async (token) => {
     try {
-      const response = await axios.get('https://sweeply-garbage-reporting-system.onrender.com/api/reports', {
+      const response = await api.get('/api/reports', {
         headers: { Authorization: `Bearer ${token}` },
       });
       console.log("REPORT DATA:", response.data);
-    console.log("IS ARRAY:", Array.isArray(response.data));
+      console.log("IS ARRAY:", Array.isArray(response.data));
 
-    setReports(Array.isArray(response.data) ? response.data : []);
+      setReports(Array.isArray(response.data) ? response.data : []);
 
-    setLoading(false);
+      setLoading(false);
     } catch (error) {
-      console.log("CLEANER RESPONSE:", response.data);
       console.error('Error fetching reports:', error);
       setLoading(false);
     }
@@ -89,7 +89,7 @@ const CleanerDashboardPage = () => {
       }
 
       const token = localStorage.getItem('token');
-      const res = await axios.put('https://sweeply-garbage-reporting-system.onrender.com/api/users/profile', {
+      const res = await api.put('/api/users/profile', {
         fullName: editName,
         profileImage: imageUrl
       }, {
@@ -120,8 +120,8 @@ const CleanerDashboardPage = () => {
       const imageUrl = await uploadToCloudinary(proofImage);
       const token = localStorage.getItem('token');
       
-      await axios.put(
-        `https://sweeply-garbage-reporting-system.onrender.com/api/reports/${selectedReport._id}`,
+      await api.put(
+        `/api/reports/${selectedReport._id}`,
         { 
           status: 'Cleaned',
           cleanedImageUrl: imageUrl // Send proof to backend
