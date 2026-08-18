@@ -99,7 +99,7 @@ const ReportPage = () => {
       };
 
       await axios.post(
-        `${API_URL}/reports/myreports`, 
+        `${API_URL}/reports`,
         reportData,
         config
       );

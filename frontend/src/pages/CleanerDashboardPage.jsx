@@ -47,17 +47,16 @@ const CleanerDashboardPage = () => {
   const fetchReports = async (token) => {
     try {
       const response = await axios.get(
-        `${API_URL}/reports/myreports`, {
+        `${API_URL}/reports`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       console.log("REPORT DATA:", response.data);
-    console.log("IS ARRAY:", Array.isArray(response.data));
+      console.log("IS ARRAY:", Array.isArray(response.data));
 
-    setReports(Array.isArray(response.data) ? response.data : []);
+      setReports(Array.isArray(response.data) ? response.data : []);
 
-    setLoading(false);
+      setLoading(false);
     } catch (error) {
-      console.log("CLEANER RESPONSE:", response.data);
       console.error('Error fetching reports:', error);
       setLoading(false);
     }
@@ -91,7 +90,7 @@ const CleanerDashboardPage = () => {
       }
 
       const token = localStorage.getItem('token');
-      const res = await axios.put('https://sweeply-garbage-reporting-system.onrender.com/api/users/profile', {
+      const res = await axios.put(`${API_URL}/users/profile`, {
         fullName: editName,
         profileImage: imageUrl
       }, {
@@ -123,7 +122,7 @@ const CleanerDashboardPage = () => {
       const token = localStorage.getItem('token');
       
       await axios.put(
-        `https://sweeply-garbage-reporting-system.onrender.com/api/reports/${selectedReport._id}`,
+        `${API_URL}/reports/${selectedReport._id}`,
         { 
           status: 'Cleaned',
           cleanedImageUrl: imageUrl // Send proof to backend
