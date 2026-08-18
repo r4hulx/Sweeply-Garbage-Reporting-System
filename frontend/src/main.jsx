@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
 
 // Import all your pages
+import ProtectedRoute from './components/ProtectedRoute.jsx';
 import LoginPage from './pages/LoginPage.jsx'
 import RegisterPage from './pages/RegisterPage.jsx'
 import DashboardPage from './pages/DashboardPage.jsx'
@@ -25,11 +26,19 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardPage />,
+    element: (
+    <ProtectedRoute allowedRole="Citizen">
+      <DashboardPage />
+    </ProtectedRoute>
+  ),
   },
   {
     path: "/cleaner-dashboard",
-    element: <CleanerDashboardPage />,
+    element: (
+    <ProtectedRoute allowedRole="Cleaner">
+      <CleanerDashboardPage />
+    </ProtectedRoute>
+  ),
   },
   {
     path: "/report",

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
-import api from '../api/axiosInstance';
 import { useNavigate } from 'react-router-dom';
+import { API_URL } from '../config/api';
 
 // --- IMPORTANT: CLOUDINARY DETAILS ---
 const CLOUDINARY_CLOUD_NAME = 'dzqxzwkfg'; 
@@ -98,7 +98,11 @@ const ReportPage = () => {
         location,
       };
 
-      await api.post('/api/reports', reportData, config);
+      await axios.post(
+        `${API_URL}/reports`,
+        reportData,
+        config
+      );
 
       setIsUploading(false);
       alert('Report Submitted Successfully!');

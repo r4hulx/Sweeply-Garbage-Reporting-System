@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import api from '../api/axiosInstance';
+import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
+import { API_URL } from "../config/api";
 
 // 1. We've moved the form component OUTSIDE.
 // It now receives all its data and functions as props.
@@ -69,7 +70,10 @@ const RegisterPage = () => {
         registrationData.employeeId = formData.employeeId;
       }
 
-await api.post('/api/users/register', registrationData);
+await axios.post(
+  `${API_URL}/users/register`,
+  registrationData
+);
       
       setLoading(false);
       alert('Registration successful! Please log in.');

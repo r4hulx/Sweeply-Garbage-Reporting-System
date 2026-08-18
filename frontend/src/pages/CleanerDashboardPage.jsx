@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import api from '../api/axiosInstance';
 import { useNavigate } from 'react-router-dom';
+import { API_URL } from '../config/api';
 
 const CleanerDashboardPage = () => {
   const [reports, setReports] = useState([]);
@@ -46,7 +46,8 @@ const CleanerDashboardPage = () => {
 
   const fetchReports = async (token) => {
     try {
-      const response = await api.get('/api/reports', {
+      const response = await axios.get(
+        `${API_URL}/reports`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       console.log("REPORT DATA:", response.data);
@@ -89,7 +90,7 @@ const CleanerDashboardPage = () => {
       }
 
       const token = localStorage.getItem('token');
-      const res = await api.put('/api/users/profile', {
+      const res = await axios.put(`${API_URL}/users/profile`, {
         fullName: editName,
         profileImage: imageUrl
       }, {
@@ -120,8 +121,8 @@ const CleanerDashboardPage = () => {
       const imageUrl = await uploadToCloudinary(proofImage);
       const token = localStorage.getItem('token');
       
-      await api.put(
-        `/api/reports/${selectedReport._id}`,
+      await axios.put(
+        `${API_URL}/reports/${selectedReport._id}`,
         { 
           status: 'Cleaned',
           cleanedImageUrl: imageUrl // Send proof to backend
