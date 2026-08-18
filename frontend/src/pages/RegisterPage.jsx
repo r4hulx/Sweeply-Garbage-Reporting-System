@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
+import { API_URL } from "../config/api";
 
 // 1. We've moved the form component OUTSIDE.
 // It now receives all its data and functions as props.
@@ -70,7 +71,7 @@ const RegisterPage = () => {
       }
 
 await axios.post(
-  'https://sweeply-garbage-reporting-system.onrender.com/api/users/register',
+  `${API_URL}/users/register`,
   registrationData
 );
       

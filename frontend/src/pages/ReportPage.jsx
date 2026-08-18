@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { API_URL } from '../config/api';
 
 // --- IMPORTANT: CLOUDINARY DETAILS ---
 const CLOUDINARY_CLOUD_NAME = 'dzqxzwkfg'; 
@@ -98,7 +99,7 @@ const ReportPage = () => {
       };
 
       await axios.post(
-        'https://sweeply-garbage-reporting-system.onrender.com/api/reports', 
+        `${API_URL}/reports/myreports`, 
         reportData,
         config
       );

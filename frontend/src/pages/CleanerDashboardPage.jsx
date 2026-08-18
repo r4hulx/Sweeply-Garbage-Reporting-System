@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { API_URL } from '../config/api';
 
 const CleanerDashboardPage = () => {
   const [reports, setReports] = useState([]);
@@ -45,7 +46,8 @@ const CleanerDashboardPage = () => {
 
   const fetchReports = async (token) => {
     try {
-      const response = await axios.get('https://sweeply-garbage-reporting-system.onrender.com/api/reports', {
+      const response = await axios.get(
+        `${API_URL}/reports/myreports`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       console.log("REPORT DATA:", response.data);

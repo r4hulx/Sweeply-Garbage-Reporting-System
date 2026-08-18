@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
+import { API_URL } from "../config/api";
+
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -8,6 +10,18 @@ const LoginPage = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  if (user) {
+    if (user.userType === 'Cleaner') {
+      navigate('/cleaner-dashboard');
+    } else {
+      navigate('/dashboard');
+    }
+  }
+}, [navigate]);
 
   const handleLogin = async (e) => {
     e.preventDefault(); // STOP the page from reloading!
@@ -18,7 +32,8 @@ const LoginPage = () => {
 
     try {
       // Make sure this port matches your backend (5001)
-      const res = await axios.post('https://sweeply-garbage-reporting-system.onrender.com/api/users/login',
+      const res = await axios.post(
+        `${API_URL}/users/login`,
   {
     email,
     password,
